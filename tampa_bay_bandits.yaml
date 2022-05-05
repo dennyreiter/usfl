@@ -29,7 +29,7 @@ template:
       - unique_id: usfl_tampa_bay_bandits_game_day
         state: >
           {% set today_string = states('sensor.date')  %}
-          {% set next_game = as_timestamp(state_attr('calendar.usfl_tampa_bay_bandits','start_time')), "%Y-%m-%d") | timestamp_custom("%Y-%m-%d") %}
+          {% set next_game = as_timestamp(state_attr('calendar.usfl_tampa_bay_bandits','start_time'), "%Y-%m-%d") | timestamp_custom("%Y-%m-%d") %}
           {% if next_game == today_string %}
           True
           {% endif %}

@@ -29,7 +29,7 @@ template:
       - unique_id: usfl_pittsburgh_maulers_game_day
         state: >
           {% set today_string = states('sensor.date')  %}
-          {% set next_game = as_timestamp(state_attr('calendar.usfl_pittsburgh_maulers','start_time')), "%Y-%m-%d") | timestamp_custom("%Y-%m-%d") %}
+          {% set next_game = as_timestamp(state_attr('calendar.usfl_pittsburgh_maulers','start_time'), "%Y-%m-%d") | timestamp_custom("%Y-%m-%d") %}
           {% if next_game == today_string %}
           True
           {% endif %}
