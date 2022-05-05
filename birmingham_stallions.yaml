@@ -1,0 +1,37 @@
+
+homeassistant:
+
+# USFL Team Sensor
+# team_id: 0
+# name: 'USFL Birmingham Stallions'
+
+#################################################################
+#                                                               #
+#                       Template Sensors                        #
+#                                                               #
+#################################################################
+
+template:
+
+  - sensor:
+      - unique_id: usfl_birmingham_stallions
+        state: BIR
+        picture: https://i.imgur.com/5x4oRR9.png
+        attributes:
+            friendly_name: "Birmingham Stallions"
+            abbrev: BIR
+            logo: https://i.imgur.com/UwA7ZG6.png
+            conference: South
+            next_game: >
+                {{ as_datetime(state_attr('calendar.usfl_birmingham_stallions','start_time')) }}
+
+  - binary_sensor:
+      - unique_id: usfl_birmingham_stallions_game_day
+        state: >
+          {% set today_string = states('sensor.date')  %}
+          {% set next_game = as_timestamp(state_attr('calendar.usfl_birmingham_stallions','start_time')), "%Y-%m-%d") | timestamp_custom("%Y-%m-%d") %}
+          {% if next_game == today_string %}
+          True
+          {% endif %}
+        attributes:
+            friendly_name: "Birmingham Stallions Game Day"

@@ -1,0 +1,37 @@
+
+homeassistant:
+
+# USFL Team Sensor
+# team_id: 2
+# name: 'USFL Michigan Panthers'
+
+#################################################################
+#                                                               #
+#                       Template Sensors                        #
+#                                                               #
+#################################################################
+
+template:
+
+  - sensor:
+      - unique_id: usfl_michigan_panthers
+        state: MI
+        picture: https://i.imgur.com/zTVgi7V.png
+        attributes:
+            friendly_name: "Michigan Panthers"
+            abbrev: MI
+            logo: https://i.imgur.com/zTVgi7V.png
+            conference: North
+            next_game: >
+                {{ as_datetime(state_attr('calendar.usfl_michigan_panthers','start_time')) }}
+
+  - binary_sensor:
+      - unique_id: usfl_michigan_panthers_game_day
+        state: >
+          {% set today_string = states('sensor.date')  %}
+          {% set next_game = as_timestamp(state_attr('calendar.usfl_michigan_panthers','start_time')), "%Y-%m-%d") | timestamp_custom("%Y-%m-%d") %}
+          {% if next_game == today_string %}
+          True
+          {% endif %}
+        attributes:
+            friendly_name: "Michigan Panthers Game Day"

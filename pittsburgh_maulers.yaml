@@ -1,0 +1,37 @@
+
+homeassistant:
+
+# USFL Team Sensor
+# team_id: 6
+# name: 'USFL Pittsburgh Maulers'
+
+#################################################################
+#                                                               #
+#                       Template Sensors                        #
+#                                                               #
+#################################################################
+
+template:
+
+  - sensor:
+      - unique_id: usfl_pittsburgh_maulers
+        state: PIT
+        picture: https://i.imgur.com/dh1SAJE.png
+        attributes:
+            friendly_name: "Pittsburgh Maulers"
+            abbrev: PIT
+            logo: https://i.imgur.com/xQrqJpq.png
+            conference: North
+            next_game: >
+                {{ as_datetime(state_attr('calendar.usfl_pittsburgh_maulers','start_time')) }}
+
+  - binary_sensor:
+      - unique_id: usfl_pittsburgh_maulers_game_day
+        state: >
+          {% set today_string = states('sensor.date')  %}
+          {% set next_game = as_timestamp(state_attr('calendar.usfl_pittsburgh_maulers','start_time')), "%Y-%m-%d") | timestamp_custom("%Y-%m-%d") %}
+          {% if next_game == today_string %}
+          True
+          {% endif %}
+        attributes:
+            friendly_name: "Pittsburgh Maulers Game Day"

@@ -1,0 +1,15 @@
+
+homeassistant:
+
+group:
+  usfl_game_day:
+    name: USFL Game Day
+    entities:
+      - binary_sensor.usfl_new_jersey_generals_game_day
+      - binary_sensor.usfl_new_orleans_breakers_game_day
+      - binary_sensor.usfl_michigan_panthers_game_day
+      - binary_sensor.usfl_philadelphia_stars_game_day
+      - binary_sensor.usfl_houston_gamblers_game_day
+      - binary_sensor.usfl_tampa_bay_bandits_game_day
+      - binary_sensor.usfl_pittsburgh_maulers_game_day
+      - binary_sensor.usfl_birmingham_stallions_game_day

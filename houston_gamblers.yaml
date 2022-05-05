@@ -1,0 +1,37 @@
+
+homeassistant:
+
+# USFL Team Sensor
+# team_id: 1
+# name: 'USFL Houston Gamblers'
+
+#################################################################
+#                                                               #
+#                       Template Sensors                        #
+#                                                               #
+#################################################################
+
+template:
+
+  - sensor:
+      - unique_id: usfl_houston_gamblers
+        state: HOU
+        picture: https://i.imgur.com/yIzM91n.png
+        attributes:
+            friendly_name: "Houston Gamblers"
+            abbrev: HOU
+            logo: https://i.imgur.com/Kpbo5kL.png
+            conference: South
+            next_game: >
+                {{ as_datetime(state_attr('calendar.usfl_houston_gamblers','start_time')) }}
+
+  - binary_sensor:
+      - unique_id: usfl_houston_gamblers_game_day
+        state: >
+          {% set today_string = states('sensor.date')  %}
+          {% set next_game = as_timestamp(state_attr('calendar.usfl_houston_gamblers','start_time')), "%Y-%m-%d") | timestamp_custom("%Y-%m-%d") %}
+          {% if next_game == today_string %}
+          True
+          {% endif %}
+        attributes:
+            friendly_name: "Houston Gamblers Game Day"

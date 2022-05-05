@@ -1,0 +1,37 @@
+
+homeassistant:
+
+# USFL Team Sensor
+# team_id: 7
+# name: 'USFL Tampa Bay Bandits'
+
+#################################################################
+#                                                               #
+#                       Template Sensors                        #
+#                                                               #
+#################################################################
+
+template:
+
+  - sensor:
+      - unique_id: usfl_tampa_bay_bandits
+        state: TB
+        picture: https://i.imgur.com/CjLZbwx.png
+        attributes:
+            friendly_name: "Tampa Bay Bandits"
+            abbrev: TB
+            logo: https://i.imgur.com/05qGCM7.png
+            conference: South
+            next_game: >
+                {{ as_datetime(state_attr('calendar.usfl_tampa_bay_bandits','start_time')) }}
+
+  - binary_sensor:
+      - unique_id: usfl_tampa_bay_bandits_game_day
+        state: >
+          {% set today_string = states('sensor.date')  %}
+          {% set next_game = as_timestamp(state_attr('calendar.usfl_tampa_bay_bandits','start_time')), "%Y-%m-%d") | timestamp_custom("%Y-%m-%d") %}
+          {% if next_game == today_string %}
+          True
+          {% endif %}
+        attributes:
+            friendly_name: "Tampa Bay Bandits Game Day"

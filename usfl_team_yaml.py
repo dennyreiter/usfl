@@ -1,0 +1,38 @@
+sensor_yaml = """
+homeassistant:
+
+# USFL Team Sensor
+# team_id: __TEAM_ID__
+# name: 'USFL __FRIENDLY_NAME__'
+
+#################################################################
+#                                                               #
+#                       Template Sensors                        #
+#                                                               #
+#################################################################
+
+template:
+
+  - sensor:
+      - unique_id: usfl___TEAM_NAME__
+        state: __TEAM_ABBREV__
+        picture: __TEAM_PICTURE__
+        attributes:
+            friendly_name: "__FRIENDLY_NAME__"
+            abbrev: __TEAM_ABBREV__
+            logo: __TEAM_LOGO__
+            conference: __TEAM_CONFERENCE__
+            next_game: >
+                {{ as_datetime(state_attr('calendar.usfl___TEAM_NAME__','start_time')) }}
+
+  - binary_sensor:
+      - unique_id: usfl___TEAM_NAME___game_day
+        state: >
+          {% set today_string = states('sensor.date')  %}
+          {% set next_game = as_timestamp(state_attr('calendar.usfl___TEAM_NAME__','start_time')), "%Y-%m-%d") | timestamp_custom("%Y-%m-%d") %}
+          {% if next_game == today_string %}
+          True
+          {% endif %}
+        attributes:
+            friendly_name: "__FRIENDLY_NAME__ Game Day"
+"""
