@@ -4,8 +4,6 @@ import sys
 import json
 import re
 
-from usfl_team_yaml import *
-
 
 def slugify(text: str) -> str:
     """Slugify a given text."""
@@ -30,6 +28,9 @@ with open("usfl_divisions.json", "r") as read_file:
 
 with open("usfl_teams.json", "r") as read_file:
     teams = json.load(read_file)
+
+with open("usfl_team_yaml.tmpl", "r") as read_file:
+    sensor_yaml = read_file.read()
 
 result = list(filter(lambda team: req.lower() in team['name'].lower(), teams))
 result += list(filter(lambda team: req.lower() in team['region'].lower(), teams))

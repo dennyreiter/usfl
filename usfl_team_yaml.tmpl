@@ -1,4 +1,3 @@
-sensor_yaml = """
 homeassistant:
 
 # USFL Team Sensor
@@ -29,10 +28,9 @@ template:
       - unique_id: usfl___TEAM_NAME___game_day
         state: >
           {% set today_string = states('sensor.date')  %}
-          {% set next_game = as_timestamp(state_attr('calendar.usfl___TEAM_NAME__','start_time')), "%Y-%m-%d") | timestamp_custom("%Y-%m-%d") %}
+          {% set next_game = as_timestamp(state_attr('calendar.usfl___TEAM_NAME__','start_time'), "%Y-%m-%d") | timestamp_custom("%Y-%m-%d") %}
           {% if next_game == today_string %}
           True
           {% endif %}
         attributes:
             friendly_name: "__FRIENDLY_NAME__ Game Day"
-"""
