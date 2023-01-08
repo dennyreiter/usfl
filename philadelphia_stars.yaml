@@ -1,4 +1,3 @@
-
 homeassistant:
 
 # USFL Team Sensor
@@ -23,13 +22,13 @@ template:
             logo: https://i.imgur.com/9afGCyA.png
             conference: North
             next_game: >
-                {{ as_datetime(state_attr('calendar.usfl_philadelphia_stars','start_time')) }}
+                {{ as_datetime(state_attr('calendar.usfl_philadelphia_stars','start_time') | float(0)) }}
 
   - binary_sensor:
       - unique_id: usfl_philadelphia_stars_game_day
         state: >
           {% set today_string = states('sensor.date')  %}
-          {% set next_game = as_timestamp(state_attr('calendar.usfl_philadelphia_stars','start_time'), "%Y-%m-%d") | timestamp_custom("%Y-%m-%d") %}
+          {% set next_game = as_timestamp(state_attr('calendar.usfl_philadelphia_stars','start_time'), default=0) | timestamp_custom("%Y-%m-%d") %}
           {% if next_game == today_string %}
           True
           {% endif %}
