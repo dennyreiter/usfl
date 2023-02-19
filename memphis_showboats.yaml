@@ -2,7 +2,7 @@ homeassistant:
 
 # USFL Team Sensor
 # team_id: 7
-# name: 'USFL Tampa Bay Bandits'
+# name: 'USFL Memphis Show Boats'
 
 #################################################################
 #                                                               #
@@ -13,24 +13,24 @@ homeassistant:
 template:
 
   - sensor:
-      - unique_id: usfl_tampa_bay_bandits
+      - unique_id: usfl_memphis_showboats
         state: TB
         picture: https://i.imgur.com/CjLZbwx.png
         attributes:
-            friendly_name: "Tampa Bay Bandits"
+            friendly_name: "Memphis Showboats"
             abbrev: TB
             logo: https://i.imgur.com/05qGCM7.png
             conference: South
             next_game: >
-                {{ as_datetime(state_attr('calendar.usfl_tampa_bay_bandits','start_time') | float(0)) }}
+                {{ as_datetime(state_attr('calendar.usfl_memphis_show_boats','start_time') | float(0)) }}
 
   - binary_sensor:
-      - unique_id: usfl_tampa_bay_bandits_game_day
+      - unique_id: usfl_memphis_show_boats_game_day
         state: >
           {% set today_string = states('sensor.date')  %}
-          {% set next_game = as_timestamp(state_attr('calendar.usfl_tampa_bay_bandits','start_time'), default=0) | timestamp_custom("%Y-%m-%d") %}
+          {% set next_game = as_timestamp(state_attr('calendar.usfl_memphis_show_boats','start_time'), default=0) | timestamp_custom("%Y-%m-%d") %}
           {% if next_game == today_string %}
           True
           {% endif %}
         attributes:
-            friendly_name: "Tampa Bay Bandits Game Day"
+            friendly_name: "Memphis Show Boats Game Day"

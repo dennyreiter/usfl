@@ -10,6 +10,6 @@ group:
       - binary_sensor.usfl_michigan_panthers_game_day
       - binary_sensor.usfl_philadelphia_stars_game_day
       - binary_sensor.usfl_houston_gamblers_game_day
-      - binary_sensor.usfl_tampa_bay_bandits_game_day
+      - binary_sensor.usfl_memphis_showboats_game_day
       - binary_sensor.usfl_pittsburgh_maulers_game_day
       - binary_sensor.usfl_birmingham_stallions_game_day
