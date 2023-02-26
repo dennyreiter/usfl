@@ -22,7 +22,7 @@ template:
             logo: https://i.imgur.com/zTVgi7V.png
             conference: North
             next_game: >
-                {{ as_datetime(state_attr('calendar.usfl_michigan_panthers','start_time') | float(0)) }}
+                {{ as_datetime(state_attr('calendar.usfl_michigan_panthers','start_time')) }}
 
   - binary_sensor:
       - unique_id: usfl_michigan_panthers_game_day

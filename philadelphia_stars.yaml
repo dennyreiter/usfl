@@ -22,7 +22,7 @@ template:
             logo: https://i.imgur.com/9afGCyA.png
             conference: North
             next_game: >
-                {{ as_datetime(state_attr('calendar.usfl_philadelphia_stars','start_time') | float(0)) }}
+                {{ as_datetime(state_attr('calendar.usfl_philadelphia_stars','start_time')) }}
 
   - binary_sensor:
       - unique_id: usfl_philadelphia_stars_game_day

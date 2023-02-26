@@ -22,7 +22,7 @@ template:
             logo: https://i.imgur.com/xQrqJpq.png
             conference: North
             next_game: >
-                {{ as_datetime(state_attr('calendar.usfl_pittsburgh_maulers','start_time') | float(0)) }}
+                {{ as_datetime(state_attr('calendar.usfl_pittsburgh_maulers','start_time')) }}
 
   - binary_sensor:
       - unique_id: usfl_pittsburgh_maulers_game_day

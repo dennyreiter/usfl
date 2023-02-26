@@ -22,7 +22,7 @@ template:
             logo: https://i.imgur.com/UwA7ZG6.png
             conference: South
             next_game: >
-                {{ as_datetime(state_attr('calendar.usfl_birmingham_stallions','start_time') | float(0)) }}
+                {{ as_datetime(state_attr('calendar.usfl_birmingham_stallions','start_time')) }}
 
   - binary_sensor:
       - unique_id: usfl_birmingham_stallions_game_day

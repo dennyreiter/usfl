@@ -22,7 +22,7 @@ template:
             logo: https://i.imgur.com/mVCJlir.png
             conference: South
             next_game: >
-                {{ as_datetime(state_attr('calendar.usfl_new_orleans_breakers','start_time') | float(0)) }}
+                {{ as_datetime(state_attr('calendar.usfl_new_orleans_breakers','start_time')) }}
 
   - binary_sensor:
       - unique_id: usfl_new_orleans_breakers_game_day

@@ -22,7 +22,7 @@ template:
             logo: https://i.imgur.com/R9UOOoM.png
             conference: North
             next_game: >
-                {{ as_datetime(state_attr('calendar.usfl_new_jersey_generals','start_time') | float(0)) }}
+                {{ as_datetime(state_attr('calendar.usfl_new_jersey_generals','start_time')) }}
 
   - binary_sensor:
       - unique_id: usfl_new_jersey_generals_game_day
